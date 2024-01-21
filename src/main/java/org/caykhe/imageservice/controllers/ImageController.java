@@ -20,7 +20,7 @@ public class ImageController {
         if(file == null)
             throw new ApiException("Dữ liệu không hợp lệ", HttpStatus.BAD_REQUEST);
         String url = imageService.upload(file);
-        return new ResponseEntity<>(url, HttpStatus.OK);
+        return new ResponseEntity<>(url, HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/{imageName}")
