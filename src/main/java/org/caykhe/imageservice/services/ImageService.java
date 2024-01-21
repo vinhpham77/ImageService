@@ -1,5 +1,6 @@
 package org.caykhe.imageservice.services;
 
+import ch.qos.logback.core.CoreConstants;
 import lombok.RequiredArgsConstructor;
 import org.caykhe.imageservice.dtos.ApiException;
 import org.caykhe.imageservice.models.Image;
@@ -131,7 +132,7 @@ ImageService {
         try {
             Date now = new Date();
             Date twoHoursBefore = new Date(now.getTime() - 24 * 60 * 60 * 1000);
-            List<Image> images = imageRepository.findImagesByStatusAndCreatedAt(false, twoHoursBefore);
+            List<Image> images = imageRepository.findImagesByStatusAndCreatedAt(false, twoHoursBefore.toInstant());
             for (Image i: images) {
                 Path pathImage = Paths.get(uploadDir + i.getId() + "." + i.getExtension());
                 Files.delete(pathImage);
